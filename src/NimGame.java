@@ -51,11 +51,16 @@ public class NimGame {
                 System.out.println("There are " + marbles + " marbles left. How many would you like to take: 1, 2 or 3? ");
                 String input_user = scanUser.nextLine(); // from console input
                 int number = Integer.parseInt(input_user); // converts a String into an int value
-                if (number > 3 || number < 1) {
-                    System.out.println("Invalid number. Please take: 1,2, or 3");
+                if (number <= 3 && number >=1) {
+                    if(number <= marbles){
+                        marbles = marbles - number;
+                        break;
+                    }else{
+                        System.out.println("Please Choose From The Remaining Marbles");
+                    }
+
                 } else {
-                    marbles = marbles - number;
-                    break;
+                    System.out.println("Invalid number. Please take: 1,2, or 3. If ");
                 }
             }catch(NumberFormatException e){
                 System.out.println("Invalid Entry. Please Try Again");
@@ -78,8 +83,7 @@ public class NimGame {
         System.out.println( "* Loss: " + loss);
         System.out.println(" *************** \n\n");
 
-        boolean cont = true;
-        while(cont)
+        while(true)
             try {
                 System.out.println("Would you like to play again? (Enter 1 to play again and 0 to exit) ");
                 String input = scanUser.nextLine();
@@ -93,10 +97,12 @@ public class NimGame {
                     play(); // calls the function play()
 
 
-                } else {
+                } else if(playAgainInt == 0) {
                     System.out.println("Game over!");
+                    break;
+                }else{
+                    System.out.println("Invalid Entry");
                 }
-                cont = false;
             }catch(NumberFormatException e){
                 System.out.println("Invalid Entry. Please Try Again");
             }
